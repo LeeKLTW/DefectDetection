@@ -26,7 +26,7 @@ def make_mask(img_name):
     return defect_classes, mask
 
 
-
+#TODO: store it instead of showing it
 def show_mask_image(img_name):
   #defect_classes = train_df[train_df.ImageId.isin([img_name])].ClassId
   defect_classes, mask = make_mask(img_name)
