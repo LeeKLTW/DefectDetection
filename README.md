@@ -1,1 +1,1 @@
-# Steel-Defect-Detection
+# Steel Defect Detection Project
