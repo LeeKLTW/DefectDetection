@@ -1,8 +1,8 @@
 from tensorflow.keras.models import Model, load_model
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Conv2DTranspose, concatenate
-from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-from tensorflow.keras import backend as K
+#from tensorflow.keras.optimizers import Adam
+#from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
+#from tensorflow.keras import backend as K
 
 
 def UNet(input_shape):

@@ -2,6 +2,9 @@ from DefectDetection.applications.UNet import UNet
 from DefectDetection.utils.data_generator import DataGenerator
 from DefectDetection.metrics.dice_coef import dice_coef
 
+import matplotlib.pyplot as plt
+from tensorflow.keras.optimizers import Adam
+
 
 from absl import flags
 
@@ -57,8 +60,16 @@ def main():
     UNet_model.compile(optimizer=adam, loss='binary_crossentropy', metrics=[dice_coef])
 
     #TODO
-    train_data_gen = DataGenerator ...
-    valid_data_gen = DataGenerator ...
+    params = {'df': train_df,
+              'img_h': 256,
+              'img_w': 1600,
+              'batch_size': 16,
+              'n_classes': 4,
+              'train_path': '/content/input/train_images',
+              'shuffle': True}
+
+    train_data_gen = DataGenerator(list_IDs = train_idx, **params)
+    valid_data_gen = DataGenerator(list_IDs = valid_idx, **params)
 
     History = UNet_model.fit(train_data_gen,
                              validation_data=valid_data_gen,
