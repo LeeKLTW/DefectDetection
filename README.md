@@ -22,4 +22,10 @@ The metrics we use to evaluate our model is mean [Dice coefficient](https://en.w
 The training result:
 
 ![](https://github.com/RocioLiu/DefectDetection/blob/master/assets/training1.png)
- 
+   
+   
+## Prediction
+We display the prediction of some image
+![](https://github.com/RocioLiu/DefectDetection/blob/master/assets/prediction1.png)  
+  
+  
