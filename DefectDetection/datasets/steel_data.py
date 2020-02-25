@@ -7,6 +7,9 @@ TRAIN_CSV = "train.csv"
 TRAIN_IMG_SUBDIR = "train_images"
 TEST_IMG_SUBDIR = "test_images"
 
+TRAIN_IMG_DIR = os.path.join(DATA_DIR, TRAIN_IMG_SUBDIR)
+TEST_IMG_DIR = os.path.join(DATA_DIR, TEST_IMG_SUBDIR)
+
 
 def load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV):
     train_df = pd.read_csv(os.path.join(data_dir, train_csv))

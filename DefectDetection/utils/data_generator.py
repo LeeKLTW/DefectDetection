@@ -3,14 +3,16 @@ import numpy as np
 import os
 import cv2
 
-from ..utils.masks import make_mask
+from DefectDetection.utils.masks import make_mask
+from DefectDetection.datasets.steel_data import DATA_DIR, TRAIN_CSV, TRAIN_IMG_DIR, load_csv
 
+train_df = load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV)
 
-class DataGenerator(tf.keras.utils.Sequence, train_images_dir):
+class DataGenerator(tf.keras.utils.Sequence):
     'Generates data for tf'
 
     def __init__(self, df, list_IDs, batch_size=16, img_h=256, img_w=1600,
-                 n_classes=4, train_path=train_images_dir, shuffle=True):
+                 n_classes=4, train_path=TRAIN_IMG_DIR, shuffle=True):
         'Initialization'
         self.df = df
         self.list_IDs = list_IDs
@@ -34,8 +36,10 @@ class DataGenerator(tf.keras.utils.Sequence, train_images_dir):
         # Find list of IDs
         list_IDs_img = [self.list_IDs[k] for k in indexes]
 
+        train_df = load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV)
+
         # Generate data
-        X, y = self.__data_generation(list_IDs_img)
+        X, y = self.__data_generation(list_IDs_img, train_df)
 
         return X, y
 
@@ -45,25 +49,21 @@ class DataGenerator(tf.keras.utils.Sequence, train_images_dir):
         if self.shuffle == True:
             np.random.shuffle(self.indexes)
 
-    def __data_generation(self, list_IDs_img):
+    def __data_generation(self, list_IDs_img, train_df):
         'Generates data containing batch_size samples'  # X : (n_samples, *dim, n_channels)
         # Initialization
         X = np.empty((self.batch_size, self.img_h, self.img_w, 3), dtype=np.float32)
         y = np.empty((self.batch_size, self.img_h, self.img_w, self.n_classes), dtype=np.uint8)
-        img_names = []
 
         # Generate data
         for i, img_name in enumerate(list_IDs_img):
-            # img_name = self.df.ImageId.iloc[ID]
-            img_path = os.path.join(self.train_path, img_name)
+            img_path = os.path.join(TRAIN_IMG_DIR, img_name)
             img = cv2.imread(img_path)
             img = img.astype(np.float32) / 255.
             X[i, :, :, :] = img
 
-            # rles = self.df.EncodedPixels.iloc[ID]
-            _, masks = make_mask(img_name)
+            _, masks = make_mask(img_name, train_df)
             y[i, :, :, :] = masks
 
-            img_names.append(img_name)
 
         return X, y

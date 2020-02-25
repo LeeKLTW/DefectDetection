@@ -2,14 +2,16 @@ import numpy as np
 import os
 import cv2
 
-from ..utils.masks import make_mask
+import tensorflow as tf
+
+from DefectDetection.utils.masks import make_mask
 
 
 class DataGenerator(tf.keras.utils.Sequence):
     'Generates data for tf'
 
     def __init__(self, df, list_IDs, batch_size=16, img_h=256, img_w=1600,
-                 n_classes=4, train_path=train_images_dir, shuffle=True):
+                 n_classes=4, train_path=train_path, shuffle=True):
         'Initialization'
         self.df = df
         self.list_IDs = list_IDs

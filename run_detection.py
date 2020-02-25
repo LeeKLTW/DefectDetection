@@ -1,11 +1,13 @@
 from DefectDetection.applications.UNet import UNet
 from DefectDetection.utils.data_generator import DataGenerator
 from DefectDetection.metrics.dice_coef import dice_coef
+from DefectDetection.datasets.steel_data import DATA_DIR,TRAIN_CSV,TRAIN_IMG_SUBDIR,TEST_IMG_SUBDIR,load_img,load_csv
 
 from IPython.display import display
 import matplotlib.pyplot as plt
 
 from tensorflow.keras.optimizers import Adam
+from sklearn.model_selection import train_test_split
 
 
 from absl import flags
@@ -44,15 +46,15 @@ def _plot_summary(History):
 
 
 
-#FIXME
-def show_predictions(dataset=None, num=1):
-  if dataset:
-    for image, mask in dataset.take(num):
-      pred_mask = model.predict(image)
-      display([image[0], mask[0], create_mask(pred_mask)])
-  else:
-    display([sample_image, sample_mask,
-             create_mask(model.predict(sample_image[tf.newaxis, ...]))])
+# #FIXME
+# def show_predictions(dataset=None, num=1):
+#   if dataset:
+#     for image, mask in dataset.take(num):
+#       pred_mask = model.predict(image)
+#       display([image[0], mask[0], create_mask(pred_mask)])
+#   else:
+#     display([sample_image, sample_mask,
+#              create_mask(model.predict(sample_image[tf.newaxis, ...]))])
 
 
 def main():
@@ -62,6 +64,13 @@ def main():
     UNet_model.compile(optimizer=adam, loss='binary_crossentropy', metrics=[dice_coef])
 
     #TODO
+    train_df = load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV)
+    defect_names, defect_img = load_img(
+        data_dir=DATA_DIR, train_csv=TRAIN_CSV,
+        train_img_subdir=TRAIN_IMG_SUBDIR, test_img_subdir=TEST_IMG_SUBDIR)
+
+    train_idx, valid_idx = train_test_split(defect_names, test_size=0.2, random_state=123)
+
     params = {'df': train_df,
               'img_h': 256,
               'img_w': 1600,
@@ -70,12 +79,12 @@ def main():
               'train_path': '/content/input/train_images',
               'shuffle': True}
 
-    train_data_gen = DataGenerator(list_IDs = train_idx, **params)
-    valid_data_gen = DataGenerator(list_IDs = valid_idx, **params)
+    train_data_gen = DataGenerator(list_IDs=train_idx, **params)
+    valid_data_gen = DataGenerator(list_IDs=valid_idx, **params)
 
     History = UNet_model.fit(train_data_gen,
                              validation_data=valid_data_gen,
-                             epochs=30,
+                             epochs=2,
                              verbose=1)
 
     _plot_summary(History)
@@ -86,3 +95,4 @@ def main():
     if FLAGS.do_predict:
         preds = UNet_model.predict(valid_data_gen, verbose=1)
 
+main()
