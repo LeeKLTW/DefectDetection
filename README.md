@@ -12,3 +12,6 @@ The defect masks of the steel images are encoded using Run-length encoding. Firs
 ![5](https://github.com/RocioLiu/DefectDetection/blob/master/assets/0014fce06.jpg)
   
   
+## Training
+We built a U-Net model
+![](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png)
