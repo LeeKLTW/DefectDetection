@@ -1,5 +1,7 @@
 # Steel Defect Detection Project
 
-Build a U-Net model to predict and classify the defect regions of steel images using Kaggle dataset [Severstal: Steel Defect Detection](https://www.kaggle.com/c/severstal-steel-defect-detection/overview/evaluation)  
+This is a project that use U-Net to predict and classify the defect regions of steel images with Kaggle dataset [Severstal: Steel Defect Detection](https://www.kaggle.com/c/severstal-steel-defect-detection/overview/evaluation)  
   
+  
+(https://github.com/RocioLiu/DefectDetection/blob/master/assets/0002cc93b.jpg)
   
