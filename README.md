@@ -13,7 +13,7 @@ The defect masks of the steel images are encoded using Run-length encoding. Firs
   
   
 ## Training
-We built a U-Net model
+We built a U-Net model and trained for 30 epochs
 ![6](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png)    
   
-  
+ 
