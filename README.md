@@ -25,7 +25,8 @@ The training result:
    
    
 ## Prediction
-We display the prediction of some image
+We display the prediction of some image  
+   
 ![](https://github.com/RocioLiu/DefectDetection/blob/master/assets/prediction1.png)  
   
   
