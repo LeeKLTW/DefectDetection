@@ -2,27 +2,27 @@ import numpy as np
 import pandas as pd
 import os
 
-data_dir = "/Users/rocioliu/Kaggle/severstal-steel-defect-detection"
-train_csv = "train.csv"
-train_img_subdir = "train_images"
-test_img_subdir = "test_images"
+DATA_DIR = "/Users/rocioliu/Kaggle/severstal-steel-defect-detection"
+TRAIN_CSV = "train.csv"
+TRAIN_IMG_SUBDIR = "train_images"
+TEST_IMG_SUBDIR = "test_images"
 
 
-def load_csv(data_dir, train_csv):
+def load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV):
     train_df = pd.read_csv(os.path.join(data_dir, train_csv))
     return train_df
 
 
 # train_df = pd.read_csv(os.path.join(data_dir, "train.csv"))
 
-train_df = load_csv(data_dir, train_csv)
+train_df = load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV)
 
 
 def load_img(
-        data_dir="/Users/rocioliu/Kaggle/severstal-steel-defect-detection",
-        train_csv="train.csv",
-        train_img_subdir="train_images",
-        test_img_subdir="test_images", ):
+        data_dir=DATA_DIR,
+        train_csv=TRAIN_CSV,
+        train_img_subdir=TRAIN_IMG_SUBDIR,
+        test_img_subdir=TEST_IMG_SUBDIR):
 
     train_df = load_csv(data_dir, train_csv)
     train_img_dir = os.path.join(data_dir, train_img_subdir)

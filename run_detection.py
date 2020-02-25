@@ -2,7 +2,9 @@ from DefectDetection.applications.UNet import UNet
 from DefectDetection.utils.data_generator import DataGenerator
 from DefectDetection.metrics.dice_coef import dice_coef
 
+from IPython.display import display
 import matplotlib.pyplot as plt
+
 from tensorflow.keras.optimizers import Adam
 
 

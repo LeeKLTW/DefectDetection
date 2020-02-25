@@ -6,7 +6,7 @@ import cv2
 from ..utils.masks import make_mask
 
 
-class DataGenerator(tf.keras.utils.Sequence):
+class DataGenerator(tf.keras.utils.Sequence, train_images_dir):
     'Generates data for tf'
 
     def __init__(self, df, list_IDs, batch_size=16, img_h=256, img_w=1600,
