@@ -39,5 +39,5 @@ def show_mask_image(img_name, train_df, train_img_dir):
         for j in range(len(contours)):
             cv2.polylines(img, contours[j], True, palette[i], 2) #cv2.polylines(影像, 頂點座標, 封閉型, 顏色, 線條寬度)
     #ax.set_title(img_name)
-    cv2.imwrite(f'./assets/{img_name}',img)
+    cv2.imwrite('./assets/{}'.format(img))
     # ax.imshow(img)
