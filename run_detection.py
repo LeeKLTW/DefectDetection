@@ -6,6 +6,7 @@ from DefectDetection.datasets.steel_data import DATA_DIR,TRAIN_CSV,TRAIN_IMG_SUB
 from IPython.display import display
 import matplotlib.pyplot as plt
 
+from tensorflow.keras.models import load_model
 from tensorflow.keras.optimizers import Adam
 from sklearn.model_selection import train_test_split
 
@@ -96,3 +97,8 @@ def main():
         preds = UNet_model.predict(valid_data_gen, verbose=1)
 
 main()
+
+
+# Load the model
+UNet_model = load_model("steelDefect_model.h5",
+                        custom_objects={"dice_coef":dice_coef})
