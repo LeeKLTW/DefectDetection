@@ -91,7 +91,7 @@ def main():
     _plot_summary(History)
 
     UNet_model.save(FLAGS.model_path)
-    print(f"Save model at",FLAGS.model_path)
+    print("Save model at {}".format(FLAGS.model_path))
 
     if FLAGS.do_predict:
         preds = UNet_model.predict(valid_data_gen, verbose=1)
