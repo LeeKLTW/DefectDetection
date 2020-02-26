@@ -14,7 +14,7 @@ The defect masks of the steel images are encoded using Run-length encoding. Firs
   
 ## Training
 We built a U-Net model and trained it for 30 epochs
-![](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/u-net-architecture.png)    
+![](https://github.com/RocioLiu/DefectDetection/blob/master/assets/unet.png)    
   
 ### Metrics
 The metrics we use to evaluate our model is mean [Dice coefficient](https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient).
