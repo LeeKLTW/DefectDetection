@@ -1,1 +1,1 @@
-from .dice_coef import dice_coef
+from .eval import dice_coef

@@ -1,9 +1,10 @@
-from DefectDetection.applications.UNet import UNet
+from DefectDetection.models.unet import UNet
 from DefectDetection.utils.data_generator import DataGenerator
 from DefectDetection.metrics.dice_coef import dice_coef
 from DefectDetection.datasets.steel_data import DATA_DIR,TRAIN_CSV,TRAIN_IMG_SUBDIR,TEST_IMG_SUBDIR,load_img,load_csv
+from DefectDetection.losses.focal_loss import BinaryFocalLoss
 
-from IPython.display import display
+
 import matplotlib.pyplot as plt
 
 from tensorflow.keras.models import load_model
@@ -61,8 +62,10 @@ def _plot_summary(History):
 def main():
     UNet_model = UNet(input_shape=(256, 1600, 3))
     UNet_model.summary()
+
+    focal_loss = BinaryFocalLoss()
     adam = Adam(lr=0.05, epsilon=0.1)
-    UNet_model.compile(optimizer=adam, loss='binary_crossentropy', metrics=[dice_coef])
+    UNet_model.compile(optimizer=adam, loss=focal_loss, metrics=[dice_coef])
 
     #TODO
     train_df = load_csv(data_dir=DATA_DIR, train_csv=TRAIN_CSV)
@@ -100,5 +103,4 @@ main()
 
 
 # Load the model
-UNet_model = load_model("steelDefect_model.h5",
-                        custom_objects={"dice_coef":dice_coef})
+UNet_model = load_model("steelDefect_model.h5", custom_objects={"dice_coef":dice_coef})
